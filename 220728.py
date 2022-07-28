@@ -51,30 +51,18 @@ squared(36)
 # 추가 실습0
 def solution0(a, b):
     answer = 1
+    while b > 0:
+        a, b = b, a % b
     
-    for i in range(max(int(a**0.5), int(b**0.5) + 1), 1, -1):
-        if a % i == 0 and b % i == 0:
-            answer *= i
-            a = a // i
-            b = b // i
-    
-    return answer
+    return a
 
-print(solution0(24,12))
+print(solution0(4,6))
 
 # 추가 실습1
 def solution1(a, b):
     answer = 1
     
-    for i in range(max(int(a**0.5), int(b**0.5) + 1), 1, -1):
-        if a % i == 0 and b % i == 0:
-            answer *= i
-            a = a // i
-            b = b // i
-    
-    answer = answer*a*b
-        
-    return answer
+    return a * b / solution0(a, b)
 
 print(solution1(60,48))
 
