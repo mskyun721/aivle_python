@@ -1,173 +1,177 @@
-# 실습1
-def electricPay(kwh):
-    basic_pay = 410
-    use_pay = kwh * 60.7
+# # 실습1
+# def electricPay(kwh):
+#     basic_pay = 410
+#     use_pay = kwh * 60.7
     
-    if kwh >= 100:
-        basic_pay += 500
-        use_pay += (kwh-99) * (125.9 - 60.7)
+#     if kwh >= 100:
+#         basic_pay += 500
+#         use_pay += (kwh-99) * (125.9 - 60.7)
         
-    if kwh >= 200:
-        basic_pay += 690
-        use_pay += (kwh-200) * (187.9 -125.9)
+#     if kwh >= 200:
+#         basic_pay += 690
+#         use_pay += (kwh-200) * (187.9 -125.9)
     
-    pay = basic_pay + use_pay
-    return int(pay*1.1 + pay*0.037)
+#     pay = basic_pay + use_pay
+#     return int(pay*1.1 + pay*0.037)
     
-print(electricPay(250))
+# print(electricPay(250))
 
-# 실습2
-def plus_minus(count):
-    result = ''
+# # 실습2
+# def plus_minus(count):
+#     result = ''
     
-    for i in range(count):
-        if i % 2 == 0:
-            result += '+'
-        else:
-            result += '-'
+#     for i in range(count):
+#         if i % 2 == 0:
+#             result += '+'
+#         else:
+#             result += '-'
     
-    return result
+#     return result
 
-print(plus_minus(12))
+# print(plus_minus(12))
 
-# 실습3
-def skip_num(st, end, skipNum):
-    for i in range(st, end+1):
-        if i != skipNum:
-            print(i, end=' ')
-    else:
-        print()
+# # 실습3
+# def skip_num(st, end, skipNum):
+#     for i in range(st, end+1):
+#         if i != skipNum:
+#             print(i, end=' ')
+#     else:
+#         print()
 
-skip_num(1,12,8)
+# skip_num(1,12,8)
 
-# 실습4
-def squared(num):
-    for i in range(2, 6):
-        if num ** (1/i) == int(num ** (1/i)):
-            print(int(num ** (1/i)), i)
+# # 실습4
+# def squared(num):
+#     for i in range(2, 6):
+#         if num ** (1/i) == int(num ** (1/i)):
+#             print(int(num ** (1/i)), i)
 
-squared(36)
+# squared(36)
     
-# 추가 실습0
-def solution0(a, b):
-    answer = 1
+# # 추가 실습0
+# def solution0(a, b):
+#     answer = 1
     
-    for i in range(max(int(a**0.5), int(b**0.5) + 1), 1, -1):
-        if a % i == 0 and b % i == 0:
-            answer *= i
-            a = a // i
-            b = b // i
+#     for i in range(max(int(a**0.5), int(b**0.5) + 1), 1, -1):
+#         if a % i == 0 and b % i == 0:
+#             answer *= i
+#             a = a // i
+#             b = b // i
     
-    return answer
+#     return answer
 
-print(solution0(24,12))
+# print(solution0(24,12))
 
-# 추가 실습1
-def solution1(a, b):
-    answer = 1
+# # 추가 실습1
+# def solution1(a, b):
+#     answer = 1
     
-    for i in range(max(int(a**0.5), int(b**0.5) + 1), 1, -1):
-        if a % i == 0 and b % i == 0:
-            answer *= i
-            a = a // i
-            b = b // i
+#     for i in range(max(int(a**0.5), int(b**0.5) + 1), 1, -1):
+#         if a % i == 0 and b % i == 0:
+#             answer *= i
+#             a = a // i
+#             b = b // i
     
-    answer = answer*a*b
+#     answer = answer*a*b
         
-    return answer
+#     return answer
 
-print(solution1(60,48))
+# print(solution1(60,48))
 
-# 추가 실습2
-def solution2(n):
-    count = 0
-    strN = str(n)
-    if n < 10:
-        strN = '0' + str(n)
+# # 추가 실습2
+# def solution2(n):
+#     count = 0
+#     strN = str(n)
+#     if n < 10:
+#         strN = '0' + str(n)
     
-    while True:
-        count += 1
+#     while True:
+#         count += 1
         
-        a = strN[1]
-        b = int(strN[0]) + int(strN[1])
-        c = str(b)
-        if b >= 10:
-            c = c[1]
+#         a = strN[1]
+#         b = int(strN[0]) + int(strN[1])
+#         c = str(b)
+#         if b >= 10:
+#             c = c[1]
             
-        if n == int(a+c):
-            break
-        else:
-            strN = a+c
-    # 참고
-    # while True:
-    #     a = n //10
-    #     b = n % 10
-    #     sumab = a+b
-    #     i = (b * 10) + (sumab % 10)
+#         if n == int(a+c):
+#             break
+#         else:
+#             strN = a+c
+#     # 참고
+#     # while True:
+#     #     a = n //10
+#     #     b = n % 10
+#     #     sumab = a+b
+#     #     i = (b * 10) + (sumab % 10)
         
-    return count
+#     return count
 
-print(solution2(int(input())))
+# print(solution2(int(input())))
 
 
-# 추가 실습3
-def solution3(left, right):
-    answer = 0
+# # 추가 실습3
+# def solution3(left, right):
+#     answer = 0
     
-    for i in range(left, right+1):
-        if i ** 0.5 == int(i ** 0.5):
-            answer -= i
-        else:
-            answer += i
+#     for i in range(left, right+1):
+#         if i ** 0.5 == int(i ** 0.5):
+#             answer -= i
+#         else:
+#             answer += i
     
-    return answer
+#     return answer
 
-print(solution3(13,17))
+# print(solution3(13,17))
 
 # 추가 실습4
 def solution4(num):
-    result = ''
-    answer = 0
+    result = []
     for i in num:
-        result += i
+        result.append(i)
         if i == '0' or i == '1':
-            result += '+'
+            result.append('+')
+            if len(result) >= 3:
+                result[-3] = '+'
         else:
-            result += '*'
+            result.append('*')
+            
     else:
-        result = result[:-1]
+        del result[-1]
+        print(''.join(result))
+        
     
-    
-    return eval(result)
+    return eval(''.join(result))
 
 print(solution4('02984'))
 print(solution4('1205815'))
+print(solution4('567'))
 
-# 추가 실습5
-def solution5(n):
-    result = ''
-    left = [int(i) for i in n[:len(n)//2]]
-    right = [int(i) for i in n[len(n)//2:]]
+# # 추가 실습5
+# def solution5(n):
+#     result = ''
+#     left = [int(i) for i in n[:len(n)//2]]
+#     right = [int(i) for i in n[len(n)//2:]]
     
-    if sum(left) == sum(right):
-        result = 'LUCKY'
-    else:
-        result = 'READY'
+#     if sum(left) == sum(right):
+#         result = 'LUCKY'
+#     else:
+#         result = 'READY'
         
-    return result
+#     return result
     
-print(solution5('123402'))
-print(solution5('7755'))
+# print(solution5('123402'))
+# print(solution5('7755'))
     
-# 추가 실습6
-def solution6(n):
+# # 추가 실습6
+# def solution6(n):
     
-    if n ** 0.5 == int(n ** 0.5):
-        return (int(n ** 0.5) + 1) ** 2
-    else:
-        return -1
+#     if n ** 0.5 == int(n ** 0.5):
+#         return (int(n ** 0.5) + 1) ** 2
+#     else:
+#         return -1
     
-print(solution6(121))
-print(solution6(3))
+# print(solution6(121))
+# print(solution6(3))
 
 
