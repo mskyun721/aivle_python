@@ -199,7 +199,7 @@ def comStore(store, customer):
     
     return answer
 
-
+# https://github.com/sanghas/kt_aivle_python
 def solution(store, customer):
     mum = store[len(store)-1]
     if max(customer) > mum:
@@ -248,7 +248,7 @@ def solution(store, customer):
 
 store = [2,3,7,8,9]
 customer = [7,5,9]
-print(comStore(store, customer))
+# print(comStore(store, customer))
     
 
 
@@ -303,3 +303,46 @@ def lcm_multi(arr):
 
 arr = [2,6,8,14]
 # print(lcm_multi(arr))
+
+
+# 추가실습5
+def plus_multi(s):
+    answer = []
+    count = s // 2
+
+    if s == 1:
+        return [-1]
+    
+    if s % 2 != 0:
+        answer = [count, count+1]
+    else:
+        answer = [count, count]
+    
+    return answer
+
+s = 11
+print(plus_multi(s))
+
+# 추가실습6
+def del_min(arr):
+    if len(arr) == 1:
+        return 1
+    
+    idx_min = arr.index(min(arr))
+    del arr[idx_min]
+        
+    return arr
+
+arr = [4, 3, 2, 1]
+# print(del_min(arr))
+
+# 추가실습7
+def non_overlap(arr):
+    setArr = list(set(arr))
+    setArr.sort()
+
+    return setArr
+
+arr = [1,1,3,3,0,1,1]
+#arr = [4,4,4,3,3]
+# print(non_overlap(arr))
