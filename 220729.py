@@ -164,6 +164,9 @@ def lotto(my, win):
     match = [i for i in my if i in win]
     matchCount = len(match)
     
+    # right = list(filter(lambda x: x in win, my))
+    # zeros = list(filter(lambda x: x == 0, my))
+    
     return [rate[zeroCount + matchCount], rate[matchCount]]
 
 lottos = [44, 1, 0, 0, 31, 25]
@@ -191,6 +194,10 @@ arr = [1,2,3,4,6,7,8,0]
 # - 매장 보유 부품 번호는 오름차순으로 정렬된 형태로 입력한다.
 # - 부품 리스트의 원소는 100 이하인 자연수입니다.
 
+def comStore(store, customer):
+    answer = ['yes' if i in store else 'no' for i in customer]
+    
+    return answer
 
 # def bin_search(a, key):
 #     pl = 0
@@ -223,14 +230,9 @@ arr = [1,2,3,4,6,7,8,0]
             
 #     return answer
 
-def comStore(store, customer):
-    answer = ['yes' if i in store else 'no' for i in customer]
-    
-    return answer
-
 store = [2,3,7,8,9]
 customer = [7,5,9]
-# print(comStore(store, customer))
+print(comStore(store, customer))
     
 
 import copy
@@ -255,22 +257,31 @@ def lcm(a, b):
 def lcm_multi(arr):
     while len(arr) != 1:
         arr.append(lcm(arr.pop(), arr.pop()))
-    
-    # mul = 1
-    # for i in range(len(arr)):
-    #     mul = mul * arr[i]
-            
-    # for i in range(max(arr),mul+1):
-    #     flag = 0
-    #     for j in range(len(arr)):
-    #         if i%arr[j] == 0:
-    #             flag += 1
-        
-    #     if flag == len(arr):
-    #         answer = i
-    #         break
         
     return arr[0]
 
+# def solution(arr):
+    
+#     maximum = 0
+#     for i in range(len(arr)):
+#         if arr[i] > maximum:
+#             maximum = arr[i]
+    
+#     mul = 1
+#     for i in range(len(arr)):
+#         mul = mul * arr[i]
+            
+#     for i in range(maximum,mul+1):
+#         flag = 0
+#         for j in range(len(arr)):
+#             if i%arr[j] == 0:
+#                 flag += 1
+        
+#         if flag == len(arr):
+#             answer = i
+#             break
+    
+#     return answer
+
 arr = [2,6,8,14]
-print(lcm_multi(arr))
+# print(lcm_multi(arr))
