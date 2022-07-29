@@ -199,6 +199,22 @@ def comStore(store, customer):
     
     return answer
 
+
+def solution(store, customer):
+    mum = store[len(store)-1]
+    if max(customer) > mum:
+        mum = max(customer)
+    _list = [0]*(mum+1)
+    for i in store:
+        _list[i] = 1
+    ans = []
+    for i in customer:
+        if _list[i] :
+            ans.append('yes')
+        else :
+            ans.append('no')
+    return ans
+
 # def bin_search(a, key):
 #     pl = 0
 #     pr = len(a)-1
