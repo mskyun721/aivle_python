@@ -1,25 +1,25 @@
 import pandas as pd
 
-# dict = {'Name': ['Gildong', 'Sarang', 'Jiemae', 'Yeoin'],
-#         'Level': ['Gold', 'Bronze', 'Silver', 'Gold'],
-#         'Score': [56000, 23000, 44000, 52000]}
-# df = pd.DataFrame(dict)
+dict = {'Name': ['Gildong', 'Sarang', 'Jiemae', 'Yeoin'],
+        'Level': ['Gold', 'Bronze', 'Silver', 'Gold'],
+        'Score': [56000, 23000, 44000, 52000]}
+df = pd.DataFrame(dict)
 
-# print(dict)
-# print()
-# print(df)
+print(dict)
+print()
+print(df)
 
-# # csv 불러오기
-# path = 'https://raw.githubusercontent.com/DA4BAM/dataset/master/titanic_simple.csv'
-# data = pd.read_csv(path)
+# csv 불러오기
+path = 'https://raw.githubusercontent.com/DA4BAM/dataset/master/titanic_simple.csv'
+data = pd.read_csv(path)
 
-# print(data)
-# print()
+print(data)
+print()
 
-# # head : 상위 n번 개 행 불러오기 / default 5
-# print(data.head(10))
-# # tail : 하위 n번 개 행 불러오기 / default 5
-# print(data.tail(10))
+# head : 상위 n번 개 행 불러오기 / default 5
+print(data.head(10))
+# tail : 하위 n번 개 행 불러오기 / default 5
+print(data.tail(10))
 
 path2 = 'https://raw.githubusercontent.com/DA4BAM/dataset/master/Attrition_simple2.CSV'
 # path2 = 'https://raw.githubusercontent.com/DA4BAM/dataset/master/airquality_simple.csv'
@@ -57,4 +57,12 @@ print()
 print(data2['MonthlyIncome'])
 print()
 print(data2[['Age', 'MonthlyIncome']].mean())
+
+
+### 종합실습
+titanic = pd.read_csv('https://raw.githubusercontent.com/DA4BAM/dataset/master/titanic_simple.csv')
+
+print(titanic.head())
+print(titanic.shape)
+
 
