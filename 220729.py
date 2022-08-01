@@ -306,6 +306,9 @@ arr = [2,6,8,14]
 
 
 # 추가실습5
+# Q : https://school.programmers.co.kr/learn/courses/30/lessons/12938
+# A : https://minnit-develop.tistory.com/14
+
 def plus_multi(s):
     answer = []
     count = s // 2
