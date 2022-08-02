@@ -1,126 +1,126 @@
 import numpy as np
 
-# # hanky74@datainsight.biz
+# hanky74@datainsight.biz
 
-# ### 파이썬 기초
-# # 1) range()를 사용하여, 100이하의 수 중, 7의 배수를 리스트 a 에 담으시오.
-# a = [i*7 for i in range(1,(100//7) + 1)]
-# # a = [i*7 for i in range(7, 101, 7)]
-# print(a)
+### 파이썬 기초
+# 1) range()를 사용하여, 100이하의 수 중, 7의 배수를 리스트 a 에 담으시오.
+a = [i*7 for i in range(1,(100//7) + 1)]
+# a = [i*7 for i in range(7, 101, 7)]
+print(a)
 
-# # 2) a에서 인덱스 4~ 7까지 조회하시오.
-# print(a[4:8])
+# 2) a에서 인덱스 4~ 7까지 조회하시오.
+print(a[4:8])
 
-# # 3) a에서, 끝에서 세번째 값을 조회하시오.
-# print(a[-3])
+# 3) a에서, 끝에서 세번째 값을 조회하시오.
+print(a[-3])
     
-# # 4) a에 데이터 갯수(길이)는?
-# print(len(a))
+# 4) a에 데이터 갯수(길이)는?
+print(len(a))
 
-# # 5) a 값들의 합과 평균을 구하시오.
-# print(sum(a))
-# print(sum(a) / len(a))
+# 5) a 값들의 합과 평균을 구하시오.
+print(sum(a))
+print(sum(a) / len(a))
 
-# # 6) 반복문을 이용하여 100이하의 소수(prime number)를 리스트에 담아 봅시다.
-# # * 소수(prime number) : 약수가 오직 1과 자기자신 만 존재하는 수. 
-# def q6():
-#     prime_num = [0 for i in range(101)]
-#     prime = []
-#     for i in range(2, 101):
-#         if prime_num[i] == 0:
-#             prime_num[i] = i
-#             prime.append(i)
-#             for j in range(i+i, 101, i):
-#                 prime_num[j] = -1
+# 6) 반복문을 이용하여 100이하의 소수(prime number)를 리스트에 담아 봅시다.
+# * 소수(prime number) : 약수가 오직 1과 자기자신 만 존재하는 수. 
+def q6():
+    prime_num = [0 for i in range(101)]
+    prime = []
+    for i in range(2, 101):
+        if prime_num[i] == 0:
+            prime_num[i] = i
+            prime.append(i)
+            for j in range(i+i, 101, i):
+                prime_num[j] = -1
     
-#     return prime
+    return prime
 
-# print(q6())
-
-
-# # 7) 아래 값으로 딕셔너리 d를 생성해 봅시다.
-
-# # |key | value|
-# # |----|----|
-# # |v1 | [1,2,3]|
-# # |v2 | {'a':23, 'b':[4,5]}|
-
-# d = {'v1' : [1,2,3], 'v2' : {'a':23, 'b':[4,5]}}
-# print(d)
-
-# # 8) d에서 [1,2,3]을 출력해 봅시다.
-# print(d['v1'])
-
-# # 9) d에서 23을 출력해 봅시다.
-# print(d['v2']['a'])
-
-# # 10) d에서 5를 출력해봅시다.
-# print(d['v2']['b'][1])
-
-# # 11) d에 key 'newKey' , value (1,2) 를 추가하고 출력해봅시다.
-# d['newKey'] = (1,2)
-# print(d['newKey'])
+print(q6())
 
 
-# ### Numpy 기초 - 숫자 타입
+# 7) 아래 값으로 딕셔너리 d를 생성해 봅시다.
 
-# a = np.array([10, 11, 12, 13, 14, 15])
-# print('----------a----------')
-# print(a)
-# print(type(a))
-# print(a.ndim)
-# print(a.shape)
-# print(a.dtype)
-# print(a[0])
-# print(a.size)
-# print()
+# |key | value|
+# |----|----|
+# |v1 | [1,2,3]|
+# |v2 | {'a':23, 'b':[4,5]}|
 
+d = {'v1' : [1,2,3], 'v2' : {'a':23, 'b':[4,5]}}
+print(d)
 
-# b = np.array([[11, 12, 13, 14], 
-#               [15, 16, 17, 18], 
-#               [1.9, 20, 21, 22]])
+# 8) d에서 [1,2,3]을 출력해 봅시다.
+print(d['v1'])
 
-# print('----------b----------')
-# print(b)
-# print(type(b))
-# print(b.ndim)
-# print(b.shape)
-# print(b.dtype)
-# print(b[0])
-# print(b.size)
-# print(b.reshape(2,6))
-# print(b[[i for i in range(0,3,2)]])
-# print(b[[0, 1, 2],[0, 1, 0]])
-# print()
+# 9) d에서 23을 출력해 봅시다.
+print(d['v2']['a'])
 
-# c = np.array([[[1,2,3],[4,5,6]],
-#               [[7,8,9],[0,1,2]]])
+# 10) d에서 5를 출력해봅시다.
+print(d['v2']['b'][1])
 
-# print('----------c----------')
-# print(c)
-# print(c.reshape(-1, 4,3))
-# print()
+# 11) d에 key 'newKey' , value (1,2) 를 추가하고 출력해봅시다.
+d['newKey'] = (1,2)
+print(d['newKey'])
 
 
-# # 배열 만들기
-# a = np.array([[11, 12, 13, 14], 
-#               [15, 16, 17, 18], 
-#               [19, 20, 21, 22]])
+### Numpy 기초 - 숫자 타입
 
-# # 배열 형태 확인
-# print(a)
+a = np.array([10, 11, 12, 13, 14, 15])
+print('----------a----------')
+print(a)
+print(type(a))
+print(a.ndim)
+print(a.shape)
+print(a.dtype)
+print(a[0])
+print(a.size)
+print()
 
-# # (4, ?))형태의 2차원 배열
-# print(a.reshape(4,-1))
 
-# # (2, ?) 형태의 2차원 배열
-# print(a.reshape(2,-1))
+b = np.array([[11, 12, 13, 14], 
+              [15, 16, 17, 18], 
+              [1.9, 20, 21, 22]])
 
-# # np.eye()
-# print(np.eye(9))
+print('----------b----------')
+print(b)
+print(type(b))
+print(b.ndim)
+print(b.shape)
+print(b.dtype)
+print(b[0])
+print(b.size)
+print(b.reshape(2,6))
+print(b[[i for i in range(0,3,2)]])
+print(b[[0, 1, 2],[0, 1, 0]])
+print()
 
-# # np.full()
-# print(np.full((2,2), 'a'))
+c = np.array([[[1,2,3],[4,5,6]],
+              [[7,8,9],[0,1,2]]])
+
+print('----------c----------')
+print(c)
+print(c.reshape(-1, 4,3))
+print()
+
+
+# 배열 만들기
+a = np.array([[11, 12, 13, 14], 
+              [15, 16, 17, 18], 
+              [19, 20, 21, 22]])
+
+# 배열 형태 확인
+print(a)
+
+# (4, ?))형태의 2차원 배열
+print(a.reshape(4,-1))
+
+# (2, ?) 형태의 2차원 배열
+print(a.reshape(2,-1))
+
+# np.eye()
+print(np.eye(9))
+
+# np.full()
+print(np.full((2,2), 'a'))
 
 # numpy 인덱스
 test = np.array([[11, 12, 13, 14], 
