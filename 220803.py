@@ -133,16 +133,21 @@ import pandas as pd
 # https://finance.daum.net/exchanges
 # headers : referer, user-agent 설정
 
-url = 'https://finance.daum.net/api/exchanges/FRX.KRWUSD/days?symbolCode=FRX.KRWUSD&terms=days&page=2&perPage=10'
+url = 'https://finance.daum.net/api/exchanges/summaries'
 headers = {
-    'referer':'https://finance.daum.net/exchanges/FRX.KRWUSD',
+    'referer':'https://finance.daum.net/exchanges',
     'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36'
 }
 
-# daum_exchange = requests.get(url=url, headers=headers)
-daum_exchange = requests.get(url)
+daum_exchange = requests.get(url=url, headers=headers)
+# daum_exchange = requests.get(url)
 print(daum_exchange)
 print(daum_exchange.text)
 data = daum_exchange.json()['data']
 df = pd.DataFrame(data)[['date', 'basePrice']]
 print(df)
+
+
+import m_zigbang
+
+print(m_zigbang.zigbang('주례동'))
