@@ -61,71 +61,88 @@ import pandas as pd
 # print(df[['kospi', 'kosdaq', 'usd']].corr())
 
 
-### naver api : papago
-CLIENT_ID, CLIENT_SECRET = "Y7kkW5s3waqiGemisIDm", "O0iVtJhKyp"
+# ### naver api : papago
+# CLIENT_ID, CLIENT_SECRET = "Y7kkW5s3waqiGemisIDm", "O0iVtJhKyp"
 
-def ppg_translate(id,pw,txt,fromNa='ko', toNa='en'):
-    """naver papago translate api
+# def ppg_translate(id,pw,txt,fromNa='ko', toNa='en'):
+#     """naver papago translate api
 
-    Args:
-        id (str): naver api id
-        pw (str): naver api secret_
-        txt (str): befor translate text
-        fromNa (str, optional): . Defaults to 'ko'.
-        toNa (str, optional): . Defaults to 'en'.
+#     Args:
+#         id (str): naver api id
+#         pw (str): naver api secret_
+#         txt (str): befor translate text
+#         fromNa (str, optional): . Defaults to 'ko'.
+#         toNa (str, optional): . Defaults to 'en'.
 
-    Returns:
-        _type_: DataFrame, after translate text
-    """
+#     Returns:
+#         _type_: DataFrame, after translate text
+#     """
     
-    params = {
-        'source': fromNa,
-        'target': toNa,
-        'text':txt
-    }
+#     params = {
+#         'source': fromNa,
+#         'target': toNa,
+#         'text':txt
+#     }
     
-    headers = {
-        "Content-Type": "application/json",
-        "X-Naver-Client-Id": id,
-        "X-Naver-Client-Secret": pw
-    }
-    response = requests.post('https://openapi.naver.com/v1/papago/n2mt', json.dumps(params), headers=headers)
+#     headers = {
+#         "Content-Type": "application/json",
+#         "X-Naver-Client-Id": id,
+#         "X-Naver-Client-Secret": pw
+#     }
+#     response = requests.post('https://openapi.naver.com/v1/papago/n2mt', json.dumps(params), headers=headers)
     
-    return response.json()["message"]["result"]["translatedText"]
+#     return response.json()["message"]["result"]["translatedText"]
 
-print(ppg_translate(CLIENT_ID, CLIENT_SECRET, '크롤링 공부'))
+# print(ppg_translate(CLIENT_ID, CLIENT_SECRET, '크롤링 공부'))
 
 
-### covid 번역
-def ppg_translate_txt(txt):
-    """naver papago translate api
+# ### covid 번역
+# def ppg_translate_txt(txt):
+#     """naver papago translate api
 
-    Args:
-        txt (str): befor translate text
+#     Args:
+#         txt (str): befor translate text
 
-    Returns:
-        _type_: DataFrame, after translate text
-    """
+#     Returns:
+#         _type_: DataFrame, after translate text
+#     """
     
-    params = {
-        'source': 'ko',
-        'target': 'en',
-        'text':txt
-    }
-    headers = {
-        "Content-Type": "application/json",
-        "X-Naver-Client-Id": CLIENT_ID,
-        "X-Naver-Client-Secret": CLIENT_SECRET
-    }
+#     params = {
+#         'source': 'ko',
+#         'target': 'en',
+#         'text':txt
+#     }
+#     headers = {
+#         "Content-Type": "application/json",
+#         "X-Naver-Client-Id": CLIENT_ID,
+#         "X-Naver-Client-Secret": CLIENT_SECRET
+#     }
     
-    response = requests.post('https://openapi.naver.com/v1/papago/n2mt', json.dumps(params), headers=headers)
+#     response = requests.post('https://openapi.naver.com/v1/papago/n2mt', json.dumps(params), headers=headers)
     
-    return response.json()["message"]["result"]["translatedText"]
+#     return response.json()["message"]["result"]["translatedText"]
 
-covid = pd.read_excel("excel/covid.xlsx")[["category", "title"]]
-covid['en'] = covid['title'].apply(ppg_translate_txt)
-print(covid)
-covid.to_excel('excel/covid_en.xlsx', index=False, encoding='utf-8-sig')
+# covid = pd.read_excel("excel/covid.xlsx")[["category", "title"]]
+# covid['en'] = covid['title'].apply(ppg_translate_txt)
+# print(covid)
+# covid.to_excel('excel/covid_en.xlsx', index=False, encoding='utf-8-sig')
 
-### 실습과제
-# https://finance.daum.net/exchages
+
+
+### 실습 과제
+# https://finance.daum.net/exchanges
+# headers : referer, user-agent 설정
+
+url = 'https://finance.daum.net/api/exchanges/FRX.KRWUSD/days?symbolCode=FRX.KRWUSD&terms=days&page=2&perPage=10'
+headers = {
+    'referer':'https://finance.daum.net/exchanges/FRX.KRWUSD',
+    'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36'
+}
+
+# daum_exchange = requests.get(url=url, headers=headers)
+daum_exchange = requests.get(url)
+print(daum_exchange)
+print(daum_exchange.text)
+data = daum_exchange.json()['data']
+df = pd.DataFrame(data)[['date', 'basePrice']]
+print(df)
