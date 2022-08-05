@@ -1,131 +1,131 @@
 import requests, json
 import pandas as pd
 
-# # requests def
-# def stock_crawling(pagesize, page, code='KOSPI'):
-#     """stock page crawling
+# requests def
+def stock_crawling(pagesize, page, code='KOSPI'):
+    """stock page crawling
 
-#     Args:
-#         pagesize (int): page size
-#         page (int): page number
-#         code (str, optional): KOSPI / KOSDAQ. Defaults to 'KOSPI'.
+    Args:
+        pagesize (int): page size
+        page (int): page number
+        code (str, optional): KOSPI / KOSDAQ. Defaults to 'KOSPI'.
 
-#     Returns:
-#         DataFrame : 'localTradedAt', 'closePrice'
-#     """
+    Returns:
+        DataFrame : 'localTradedAt', 'closePrice'
+    """
     
     
-#     url = f'https://m.stock.naver.com/api/index/{code}/price?pageSize={pagesize}&page={page}'
-#     response = requests.get(url)
-#     data = response.json()
-#     df = pd.DataFrame(data)[['localTradedAt', 'closePrice']]
+    url = f'https://m.stock.naver.com/api/index/{code}/price?pageSize={pagesize}&page={page}'
+    response = requests.get(url)
+    data = response.json()
+    df = pd.DataFrame(data)[['localTradedAt', 'closePrice']]
     
-#     return df
+    return df
 
-# def exchange_crawling(pagesize, page, code='FX_USDKRW'):
-#     """money exchange
+def exchange_crawling(pagesize, page, code='FX_USDKRW'):
+    """money exchange
 
-#     Args:
-#         pagesize (int): page size
-#         page (int): page number
-#         code (str, optional): FX_USDKRW, FX_EURKRW, FX_JPYKRW, FX_CNYKRW, each. Defaults to 'FX_USDKRW'.
+    Args:
+        pagesize (int): page size
+        page (int): page number
+        code (str, optional): FX_USDKRW, FX_EURKRW, FX_JPYKRW, FX_CNYKRW, each. Defaults to 'FX_USDKRW'.
 
-#     Returns:
-#         _DataFrame : 'localTradedAt', 'closePrice'
-#     """
+    Returns:
+        _DataFrame : 'localTradedAt', 'closePrice'
+    """
     
-#     url = f'https://api.stock.naver.com/marketindex/exchange/{code}/prices?page={page}&pageSize={pagesize}'
-#     response = requests.get(url)
-#     data = response.json()
-#     df = pd.DataFrame(data)[['localTradedAt', 'closePrice']]
+    url = f'https://api.stock.naver.com/marketindex/exchange/{code}/prices?page={page}&pageSize={pagesize}'
+    response = requests.get(url)
+    data = response.json()
+    df = pd.DataFrame(data)[['localTradedAt', 'closePrice']]
     
-#     return df
+    return df
 
 
-# # 피어스 상관계수 : df.corr()
-# kospi = stock_crawling(60, 1)
-# kosdaq = stock_crawling(60, 1, 'KOSDAQ')
-# usd = exchange_crawling(60,1)
+# 피어스 상관계수 : df.corr()
+kospi = stock_crawling(60, 1)
+kosdaq = stock_crawling(60, 1, 'KOSDAQ')
+usd = exchange_crawling(60,1)
 
-# df = kospi.copy()
-# df['kosdaq'] = kosdaq["closePrice"]
-# df['usd'] = usd["closePrice"]
-# df.rename(columns={'closePrice': 'kospi'},
-#           inplace=True)
+df = kospi.copy()
+df['kosdaq'] = kosdaq["closePrice"]
+df['usd'] = usd["closePrice"]
+df.rename(columns={'closePrice': 'kospi'},
+          inplace=True)
 
-# # df type 변경
-# df['kospi'] = df['kospi'].apply(lambda data:float(data.replace(',','')))
-# df['kosdaq'] = df['kosdaq'].apply(lambda data:float(data.replace(',','')))
-# df['usd'] = df['usd'].apply(lambda data:float(data.replace(',','')))
+# df type 변경
+df['kospi'] = df['kospi'].apply(lambda data:float(data.replace(',','')))
+df['kosdaq'] = df['kosdaq'].apply(lambda data:float(data.replace(',','')))
+df['usd'] = df['usd'].apply(lambda data:float(data.replace(',','')))
 
-# print(df[['kospi', 'kosdaq', 'usd']].corr())
+print(df[['kospi', 'kosdaq', 'usd']].corr())
 
 
-# ### naver api : papago
-# CLIENT_ID, CLIENT_SECRET = "Y7kkW5s3waqiGemisIDm", "O0iVtJhKyp"
+### naver api : papago
+CLIENT_ID, CLIENT_SECRET = "Y7kkW5s3waqiGemisIDm", "O0iVtJhKyp"
 
-# def ppg_translate(id,pw,txt,fromNa='ko', toNa='en'):
-#     """naver papago translate api
+def ppg_translate(id,pw,txt,fromNa='ko', toNa='en'):
+    """naver papago translate api
 
-#     Args:
-#         id (str): naver api id
-#         pw (str): naver api secret_
-#         txt (str): befor translate text
-#         fromNa (str, optional): . Defaults to 'ko'.
-#         toNa (str, optional): . Defaults to 'en'.
+    Args:
+        id (str): naver api id
+        pw (str): naver api secret_
+        txt (str): befor translate text
+        fromNa (str, optional): . Defaults to 'ko'.
+        toNa (str, optional): . Defaults to 'en'.
 
-#     Returns:
-#         _type_: DataFrame, after translate text
-#     """
+    Returns:
+        _type_: DataFrame, after translate text
+    """
     
-#     params = {
-#         'source': fromNa,
-#         'target': toNa,
-#         'text':txt
-#     }
+    params = {
+        'source': fromNa,
+        'target': toNa,
+        'text':txt
+    }
     
-#     headers = {
-#         "Content-Type": "application/json",
-#         "X-Naver-Client-Id": id,
-#         "X-Naver-Client-Secret": pw
-#     }
-#     response = requests.post('https://openapi.naver.com/v1/papago/n2mt', json.dumps(params), headers=headers)
+    headers = {
+        "Content-Type": "application/json",
+        "X-Naver-Client-Id": id,
+        "X-Naver-Client-Secret": pw
+    }
+    response = requests.post('https://openapi.naver.com/v1/papago/n2mt', json.dumps(params), headers=headers)
     
-#     return response.json()["message"]["result"]["translatedText"]
+    return response.json()["message"]["result"]["translatedText"]
 
-# print(ppg_translate(CLIENT_ID, CLIENT_SECRET, '크롤링 공부'))
+print(ppg_translate(CLIENT_ID, CLIENT_SECRET, '크롤링 공부'))
 
 
-# ### covid 번역
-# def ppg_translate_txt(txt):
-#     """naver papago translate api
+### covid 번역
+def ppg_translate_txt(txt):
+    """naver papago translate api
 
-#     Args:
-#         txt (str): befor translate text
+    Args:
+        txt (str): befor translate text
 
-#     Returns:
-#         _type_: DataFrame, after translate text
-#     """
+    Returns:
+        _type_: DataFrame, after translate text
+    """
     
-#     params = {
-#         'source': 'ko',
-#         'target': 'en',
-#         'text':txt
-#     }
-#     headers = {
-#         "Content-Type": "application/json",
-#         "X-Naver-Client-Id": CLIENT_ID,
-#         "X-Naver-Client-Secret": CLIENT_SECRET
-#     }
+    params = {
+        'source': 'ko',
+        'target': 'en',
+        'text':txt
+    }
+    headers = {
+        "Content-Type": "application/json",
+        "X-Naver-Client-Id": CLIENT_ID,
+        "X-Naver-Client-Secret": CLIENT_SECRET
+    }
     
-#     response = requests.post('https://openapi.naver.com/v1/papago/n2mt', json.dumps(params), headers=headers)
+    response = requests.post('https://openapi.naver.com/v1/papago/n2mt', json.dumps(params), headers=headers)
     
-#     return response.json()["message"]["result"]["translatedText"]
+    return response.json()["message"]["result"]["translatedText"]
 
-# covid = pd.read_excel("excel/covid.xlsx")[["category", "title"]]
-# covid['en'] = covid['title'].apply(ppg_translate_txt)
-# print(covid)
-# covid.to_excel('excel/covid_en.xlsx', index=False, encoding='utf-8-sig')
+covid = pd.read_excel("excel/covid.xlsx")[["category", "title"]]
+covid['en'] = covid['title'].apply(ppg_translate_txt)
+print(covid)
+covid.to_excel('excel/covid_en.xlsx', index=False, encoding='utf-8-sig')
 
 
 
@@ -151,3 +151,4 @@ print(df)
 import m_zigbang
 
 print(m_zigbang.zigbang('주례동'))
+
