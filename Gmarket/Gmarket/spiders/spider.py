@@ -20,9 +20,9 @@ class g_spider(scrapy.Spider):
         item['price'] = response.xpath('//*[@id="itemcase_basic"]/div/p/span/strong/text()')[0].extract().replace(',','')
         item['link'] = response.url
         yield item
-        
-        
-        
+
+
+
 # class GMSpider(scrapy.Spider):
 #     name = "GMB"
 #     allow_domain = ["gmarket.co.kr"]
