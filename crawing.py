@@ -94,4 +94,20 @@ def elevenMarket():
     url = 'https://www.11st.co.kr/browsing/BestSeller.tmall?method=getBestSellerMain'
 
     response = requests.get(url)
-    selector = '#bestPrdList > div:nth-child(2) > ul > li'
+    dt = BeautifulSoup(response.text, 'html.parser')
+    elements = dt.select('#bestPrdList > div:nth-child(2) > ul > li')
+    print(elements[0])
+    
+    items = []
+    for e in elements:
+        tmp = {
+            'title':e.select_one('.pname > p').text
+            , 'price':e.select_one('.sale_price').text.replace('원','').replace(',','')
+            , 'img':e.select_one('img').attrs['src']
+        }
+        items.append(tmp)
+        
+    df = pd.DataFrame(items)
+    print(df)
+    
+elevenMarket()
