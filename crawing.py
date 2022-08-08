@@ -7,6 +7,10 @@ from bs4 import BeautifulSoup
 import datetime
 import matplotlib.pyplot as plt
 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
 
 def naver_finance(size, page, code = 'KOSPI'):
     url = f'https://m.stock.naver.com/api/index/{code}/price?pageSize={size}&page={page}'
@@ -96,7 +100,6 @@ def elevenMarket():
     response = requests.get(url)
     dt = BeautifulSoup(response.text, 'html.parser')
     elements = dt.select('#bestPrdList > div:nth-child(2) > ul > li')
-    print(elements[0])
     
     items = []
     for e in elements:
@@ -110,4 +113,57 @@ def elevenMarket():
     df = pd.DataFrame(items)
     print(df)
     
-elevenMarket()
+# elevenMarket()
+
+
+
+def elevenMarket_selenium():
+    url = 'https://www.11st.co.kr/browsing/BestSeller.tmall?method=getBestSellerMain'
+    drive_path = 'C:/Users/mskyu/Desktop/driver/chromedriver.exe'
+
+    options = webdriver.ChromeOptions()
+    options.add_experimental_option("excludeSwitches", ["enable-logging"])
+    # options.add_argument('headless')
+
+    drive = webdriver.Chrome(drive_path, options=options)
+    # drive = webdriver.Chrome(drive_path)
+
+    drive.get(url)
+
+    drive.execute_script('window.scrollTo(0, document.body.scrollHeight)')
+    
+    SCROLL_PAUSE_SEC = 2
+    last_height = drive.execute_script("return document.body.scrollHeight")
+
+    while True:
+        drive.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+        # 1초 대기
+        time.sleep(SCROLL_PAUSE_SEC)
+
+        # 스크롤 다운 후 스크롤 높이 다시 가져옴
+        new_height = drive.execute_script("return document.body.scrollHeight")
+        if new_height == last_height:
+            break
+
+        last_height = new_height
+
+    drive.execute_script("window.scrollTo(0, 0);")
+    selector = "#bestPrdList > .viewtype catal_ty > ul > li"
+    elements = drive.find_elements(By.CSS_SELECTOR, selector)
+    print(len(elements))
+    items = []
+
+    for e in elements:
+        tmp = {
+            'title':e.find_element(By.CSS_SELECTOR, '.pname > p').text
+            , 'price':e.find_element(By.CSS_SELECTOR, '.sale_price').text.replace('원','').replace(',','')
+            , 'img':e.find_element(By.CSS_SELECTOR, 'img').get_attribute('src')
+        }
+        items.append(tmp)
+        
+    drive.quit()
+    return pd.DataFrame(items)
+    
+
+df = elevenMarket_selenium()
